@@ -5,7 +5,7 @@ provider:
   runtime: nodejs8.10
   stage: prod
   region: us-east-1
-  memorySize: 128
+  memorySize: 192
 
 functions:
   getBMStickets:
@@ -13,7 +13,7 @@ functions:
 
     events:
       - schedule: 
-        rate: rate(10 minutes)
+        rate: rate(15 minutes)
         enabled: true
 
     # environment: ${file(env.yml)}

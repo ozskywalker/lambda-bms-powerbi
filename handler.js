@@ -95,22 +95,43 @@ function getTickets() {
 
       var ticketPromises = [];
 
-      _.forEach(reduced_payload, function(v) {
-        var opt = {
-          method: POST,
-          uri: POWERBI_API,
-          body: v,
-          json: true
-        }
+      // _.forEach(reduced_payload, function(v) {
+      //   // don't set json: true or it'll override encoding: null
+      //   var opt = {
+      //     method: "POST",
+      //     uri: POWERBI_API,
+      //     json: v
+      //   }
 
-        ticketPromises.push(
-          rp(opt)
-            .then(function(res) {
-              console.log(`${v.TicketNumber}: ${res.statusCode}`);
-              resolve('Success');
+      //   ticketPromises.push(
+      //     rp(opt)
+      //     .then(function(res) {
+      //       console.log(`${v.TicketNumber}: ${res.statusCode}`);
+      //       resolve('Success');
+      //     }).catch(function (res) {
+      //       console.log(`${v.TicketNumber}: ${res.statusCode}`);
+      //       console.log(res);
+      //       reject(res);
+      //     })
+      //   );
+      // });
+
+      var opt = {
+        method: "POST",
+        uri: POWERBI_API,
+        json: reduced_payload
+      }
+
+      ticketPromises.push(
+        rp(opt)
+        .then(function(res) {
+            resolve('Success');
+          }).catch(function (res) {
+            console.log(`fail`);
+            console.log(res);
+            reject(res);
           })
-        );
-      });
+      );
 
       Promise.all(ticketPromises).then(function() {
         console.log("getTickets(): all promises should have triggered...");
@@ -119,7 +140,7 @@ function getTickets() {
     }).catch(function (err) {
         console.log('getTickets(): sendToPowerBI(): FAIL: ', err);
         reject(false);
-    })
+    });
   });
 }
 
