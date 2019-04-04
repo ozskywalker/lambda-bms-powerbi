@@ -1,0 +1,19 @@
+service: streaming-bms
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-1
+  memorySize: 128
+
+functions:
+  getBMStickets:
+    handler: handler.getBMStickets
+
+    events:
+      - schedule: 
+        rate: rate(10 minutes)
+        enabled: true
+
+    # environment: ${file(env.yml)}
