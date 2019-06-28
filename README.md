@@ -1,7 +1,7 @@
 # lambda-bms-powerbi
 Exploratory serverless app for streaming data from Kaseya BMS into Microsoft Power BI
 
-This function will run every 15 minutes, pulling the latest ticket summary data and sending it into a streaming dataset in PowerBI.
+This AWS Lambda function will run every 15 minutes, pulling the latest ticket summary data and sending it into a streaming dataset in PowerBI.
 
 This code is provided with no warranty or support, and is supplied as under the MIT License.
 
