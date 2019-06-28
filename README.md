@@ -1,11 +1,15 @@
 # lambda-bms-powerbi
-Exploratory serverless app for streaming data from Kaseya BMS into Microsoft Power BI
+Exploratory serverless app for streaming data one-way, from Kaseya BMS into Microsoft Power BI.
 
 This AWS Lambda function will run every 15 minutes, pulling the latest ticket summary data and sending it into a streaming dataset in PowerBI.
 
 This code is provided with no warranty or support, and is supplied as under the MIT License.
 
 I apologize in advance for my horrible Promise nest.
+
+## Recommendations
+
+Recommend you run this function no quicker than 10-15 minutes.   15min is a reasonable near-realtime sync for nearly all business use cases.
 
 ## Prerequisites
 
@@ -19,9 +23,9 @@ For more information on streaming data sets, and creating a streaming dataset vi
 ## Deployment
 
 1. Create a streaming dataset in Power BI.   You will need to set the following "values from stream":
- AccountName, DueDate, LastActivityUpdate, OpenDate, Queue, Status, TicketNumber, Title
+ *AccountName, DueDate, LastActivityUpdate, OpenDate, Queue, Status, TicketNumber, Title*
 2. Clone the repo to your local development machine
-3. Create env.yml and set the following environment variables:
+3. Create **env.yml** and set the following environment variables:
 
 ```
 POWERBI_API = (Mandatory) URL for the Streaming dataset in PowerBI
@@ -32,7 +36,7 @@ BMS_API_SERVER = Optional URL for BMS.  By default, this will be set to https://
 BMS_API_TOP = Optional control over the number of results to pull.  Set to 15 by default
 ```
 
-4. Deploy by running *serverless deploy*
+4. Deploy by running **serverless deploy**
 
 Sample output:
 ```
@@ -68,7 +72,7 @@ layers:
 
 ## Uninstall
 
-You can uninstall the stack by running *serverless remove*.
+You can uninstall the stack by running **serverless remove**
 
 Sample output:
 ```
