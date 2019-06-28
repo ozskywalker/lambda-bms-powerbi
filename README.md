@@ -5,6 +5,8 @@ This function will run every 15 minutes, pulling the latest ticket summary data 
 
 This code is provided with no warranty or support, and is supplied as under the MIT License.
 
+I apologize in advance for my horrible Promise nest.
+
 ## Prerequisites
 
 You will need the Serverless Framework deployed on your local development machine.  
@@ -78,3 +80,15 @@ Serverless: Checking Stack removal progress...
 .......
 Serverless: Stack removal finished...
 ```
+
+## TODO
+
+* Use OData expression to grab latest tickets based on creation date.  Right now we use top=15 (default) just to get some data across, but we should be able to do this off something like $filter=CreatedOn ge DateTime'yyyy-mm-ddT00:00:00'
+* Add error handling
+* Clean-up the promise mess
+* Pass metrics back to track success & no. of records passed along 
+* Add code to ensure we're not running away (concurrent execution of task).  While PowerBI will filter out duplicates, unnecessary executions because someone's accidentally triggered the function (misconfigured to run every 1min, etc.) should be caught here.
+
+## Contributions
+
+Pull requests are welcomed - while this is an experiment, if you make changes and would like to contribute back, please do :)
